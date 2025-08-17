@@ -218,8 +218,15 @@ function Prices() {
         if (!res.ok) throw new Error(`Price API error: ${res.status}`);
         const j = await res.json();
         if (!ignore) {
-          const incoming = j.prices || {};
-          setPrev(Object.fromEntries(Object.entries(incoming).map(([k, v]) => [k, lastDataRef.current[k]?.price ?? v.price])));
+          const incoming = (j.prices || {}) as Record<string, { symbol?: string; price: number }>;
+          setPrev(
+            Object.fromEntries(
+              Object.entries(incoming).map(([k, v]) => [
+                k,
+                (lastDataRef.current[k]?.price ?? v.price) as number,
+              ]),
+            ) as Record<string, number>,
+          );
           setData(incoming);
           lastDataRef.current = incoming;
           setUpdatedAt(j.ts || Date.now());
