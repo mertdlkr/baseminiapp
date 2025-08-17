@@ -372,11 +372,7 @@ export function Icon({ name, size = "md", className = "" }: IconProps) {
   );
 }
 
-type Todo = {
-  id: number;
-  text: string;
-  completed: boolean;
-}
+// legacy demo type removed to satisfy CI linting
 
 // disabled: legacy demo component kept for reference
 /*
