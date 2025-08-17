@@ -6,6 +6,9 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
+  experimental: {
+    typedRoutes: true,
+  },
 };
 
 export default nextConfig;
