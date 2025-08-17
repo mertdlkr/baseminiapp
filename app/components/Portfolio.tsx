@@ -126,8 +126,7 @@ export default function Portfolio() {
     });
   }
 
-  // addRow retained for potential future use
-  function addRow() {}
+  // removed unused addRow
 
   function removeRow(index: number) {
     setHoldings((prev) => prev.filter((_, i) => i !== index));

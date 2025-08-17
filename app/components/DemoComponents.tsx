@@ -378,7 +378,8 @@ type Todo = {
   completed: boolean;
 }
 
-// removed from UI; keep for reference if needed in the future
+// disabled: legacy demo component kept for reference
+/*
 function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([
     { id: 1, text: "Learn about MiniKit", completed: false },
@@ -479,6 +480,7 @@ function TodoList() {
     </Card>
   );
 }
+*/
 
 
 function TransactionCard() {
