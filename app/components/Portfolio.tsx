@@ -126,12 +126,8 @@ export default function Portfolio() {
     });
   }
 
-  function addRow() {
-    setHoldings((prev) => [
-      ...prev,
-      { id: "coingecko:solana", symbol: "SOL", name: "Solana", amount: 0 },
-    ]);
-  }
+  // addRow retained for potential future use
+  function addRow() {}
 
   function removeRow(index: number) {
     setHoldings((prev) => prev.filter((_, i) => i !== index));

@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useCallback, useMemo, useState, useEffect } from "react";
+import { type ReactNode, useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { useAccount } from "wagmi";
 import {
   Transaction,
@@ -206,6 +206,7 @@ function Prices() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState<number | null>(null);
+  const lastDataRef = useRef<Record<string, { symbol?: string; price: number }>>({});
 
   useEffect(() => {
     let ignore = false;
@@ -218,8 +219,9 @@ function Prices() {
         const j = await res.json();
         if (!ignore) {
           const incoming = j.prices || {};
-          setPrev(Object.fromEntries(Object.entries(incoming).map(([k, v]) => [k, data[k]?.price ?? v.price])));
+          setPrev(Object.fromEntries(Object.entries(incoming).map(([k, v]) => [k, lastDataRef.current[k]?.price ?? v.price])));
           setData(incoming);
+          lastDataRef.current = incoming;
           setUpdatedAt(j.ts || Date.now());
         }
       } catch (e) {
@@ -376,6 +378,7 @@ type Todo = {
   completed: boolean;
 }
 
+// removed from UI; keep for reference if needed in the future
 function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([
     { id: 1, text: "Learn about MiniKit", completed: false },
